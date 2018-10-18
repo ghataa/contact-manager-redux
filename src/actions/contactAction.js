@@ -19,9 +19,14 @@ export const deleteContact = id => async dispatch => {
   });
 };
 
-export const addContact = contact => {
-  return {
+export const addContact = contact => async dispatch => {
+  const response = await axios.post(
+    "http://jsonplaceholder.typicode.com/users/",
+    contact
+  );
+
+  dispatch({
     type: ADD_CONTACT,
-    payload: contact
-  };
+    payload: response.data
+  });
 };
